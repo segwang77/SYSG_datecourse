@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+:root {
+  --brand: #f43f5e;
+  --brand-dark: #e11d48;
+}
+
+body {
+  background: #fafaf9;
+  color: #1c1917;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+@utility btn { @apply inline-flex items-center justify-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition disabled:opacity-50 cursor-pointer; }
+@utility btn-primary { @apply btn bg-rose-500 text-white hover:bg-rose-600; }
+@utility btn-ghost { @apply btn border border-stone-200 bg-white hover:bg-stone-50; }
+@utility input { @apply w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm outline-none focus:border-rose-400; }
+@utility card { @apply rounded-xl border border-stone-200 bg-white; }
+@utility chip { @apply inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs whitespace-nowrap cursor-pointer; }
+
+/* 카카오맵 커스텀 오버레이 */
+.stop-marker {
+  width: 30px; height: 30px; border-radius: 9999px; background: var(--brand); color: white;
+  font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center;
+  border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,.3); cursor: pointer;
+}
+.stop-marker.active { background: #1c1917; transform: scale(1.15); }
+.stop-marker.done { background: #a8a29e; }
+.place-dot {
+  padding: 3px 8px; border-radius: 9999px; background: white; font-size: 12px; font-weight: 600;
+  border: 2px solid; box-shadow: 0 1px 4px rgba(0,0,0,.2); cursor: pointer; white-space: nowrap;
+}
+.place-dot.selected { transform: scale(1.1); z-index: 10; }
