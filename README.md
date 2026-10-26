@@ -2,42 +2,6 @@
 
 Next.js 15 (App Router) + TypeScript + Tailwind v4 + Firebase + 카카오맵
 
-## 빠른 시작
-
-```bash
-npm install
-cp .env.example .env.local   # 키 입력
-npm run dev                  # http://localhost:3000
-```
-
-## 필요한 외부 API 키
-
-| 키 | 발급처 | 용도 | 비고 |
-|---|---|---|---|
-| `NEXT_PUBLIC_KAKAO_JS_KEY` | developers.kakao.com → 앱 → JavaScript 키 | 지도, 장소 검색, 카카오톡 공유 | **플랫폼 > Web**에 `http://localhost:3000`과 배포 도메인을 등록해야 해요. **카카오맵 사용 설정 ON**도 필요해요 |
-| `KAKAO_REST_KEY` | 같은 앱의 REST API 키 | 자동차 길찾기 (카카오모빌리티) | 서버에서만 사용해요 |
-| `ODSAY_API_KEY` | lab.odsay.com | 대중교통 소요시간·요금 | "서버" 키로 발급하고 배포 서버 IP를 등록하세요 |
-| `OPENWEATHER_API_KEY` | openweathermap.org | 5일 날씨 예보 | 무료 플랜으로 충분해요 |
-| `NEXT_PUBLIC_FIREBASE_*` | Firebase 콘솔 → 프로젝트 설정 → 웹 앱 | 인증, DB, 사진 저장 | |
-
-키가 없거나 호출이 실패하면 대중교통·자동차 시간은 **직선거리 기반 추정치**로 대신 표시돼요(화면에 "(추정)"으로 표시).
-
-## Firebase 설정
-
-1. **Authentication**
-   - Google 로그인을 켜세요.
-   - 카카오 로그인은 Identity Platform으로 업그레이드한 뒤 **OpenID Connect** 공급자를 추가하세요.
-     - Provider ID: `kakao` (코드에서는 `oidc.kakao`로 사용)
-     - Issuer: `https://kauth.kakao.com`
-     - Client ID와 Secret: 카카오 REST 키와 Client Secret
-     - 카카오 콘솔에서 **OpenID Connect 활성화**를 켜고, Redirect URI에 `https://<프로젝트>.firebaseapp.com/__/auth/handler`를 등록하세요.
-2. **Firestore / Storage**: 아래 명령으로 보안 규칙과 색인을 배포하세요.
-   ```bash
-   npm i -g firebase-tools && firebase login && firebase use <프로젝트ID>
-   firebase deploy --only firestore:rules,firestore:indexes,storage
-   ```
-3. **관리자 지정**(명소 제보 검수): Firestore 콘솔에서 `admins/{내 uid}` 문서를 빈 문서로 만드세요. 그러면 `/admin` 페이지를 쓸 수 있어요.
-
 ## 기능 ↔ 코드 위치
 
 ### 1차 (MVP)
